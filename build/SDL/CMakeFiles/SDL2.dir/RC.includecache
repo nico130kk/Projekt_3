@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Nicolas/Documents/kopter/tp_projekt_3/SDL/src/main/windows/version.rc
+winresrc.h
+C:/Users/Nicolas/Documents/kopter/tp_projekt_3/SDL/src/main/windows/winresrc.h
+
