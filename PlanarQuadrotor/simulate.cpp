@@ -45,7 +45,10 @@ int main(int argc, char* args[])
      * 2. Update PlanarQuadrotor from simulation when goal is changed
     */
     Eigen::VectorXf initial_state = Eigen::VectorXf::Zero(6);
-    initial_state << 600, 300, 0, 0, 0, 0; 
+    srand(time(NULL));
+    int start_x = rand()%1200+40;
+    int start_y = rand()%680+20;
+    initial_state << start_x, start_y, 0, 0, 0, 0; 
     PlanarQuadrotor quadrotor(initial_state);
     PlanarQuadrotorVisualizer quadrotor_visualizer(&quadrotor);
     /**
@@ -54,7 +57,7 @@ int main(int argc, char* args[])
      * For implemented LQR controller, it has to be [x, y, 0, 0, 0, 0]
     */
     Eigen::VectorXf goal_state = Eigen::VectorXf::Zero(6);
-    goal_state << 200, 600, 0, 0, 0, 0;
+    goal_state << 640, 360, 0, 0, 0, 0;
     quadrotor.SetGoal(goal_state);
     /* Timestep for the simulation */
     const float dt = 0.01;
@@ -86,6 +89,11 @@ int main(int argc, char* args[])
                 if (e.type == SDL_QUIT)
                 {
                     quit = true;
+                }
+                else if(e.type == SDL_MOUSEBUTTONDOWN){
+                    SDL_GetMouseState(&x, &y);
+                    goal_state<<x,y,0,0,0,0;
+                    quadrotor.SetGoal(goal_state);
                 }
                 // else if (e.type == SDL_MOUSEMOTION)
                 // {
