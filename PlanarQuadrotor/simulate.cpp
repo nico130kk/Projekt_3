@@ -77,7 +77,7 @@ int main(int argc, char* args[])
     goal_state << 640, 360, 0, 0, 0, 0;
     quadrotor.SetGoal(goal_state);
     /* Timestep for the simulation */
-    const float dt = 0.01;
+    const float dt = 0.003;
     Eigen::MatrixXf K = LQR(quadrotor, dt);
     Eigen::Vector2f input = Eigen::Vector2f::Zero(2);
 
@@ -115,8 +115,8 @@ int main(int argc, char* args[])
                     goal_state<<x,y,0,0,0,0;
                     std::cout<<"\nNew goal set "<<x<<" "<<y<<"\n";
                     quadrotor.SetGoal(goal_state);
-                    Eigen::MatrixXf K = LQR(quadrotor, dt);
-                    Eigen::Vector2f input = Eigen::Vector2f::Zero(2);
+                  //  Eigen::MatrixXf K = LQR(quadrotor, dt);
+                  //  Eigen::Vector2f input = Eigen::Vector2f::Zero(2);
                 }
                 else if(e.type==SDL_KEYDOWN && e.key.keysym.sym==SDLK_p){
                     std::thread p(doPlot,x_history,y_history,theta_history,time);
@@ -125,7 +125,7 @@ int main(int argc, char* args[])
                 
             }
 
-            SDL_Delay((int) dt * 10000);
+            SDL_Delay((int) dt * 1000);
 
             SDL_SetRenderDrawColor(gRenderer.get(), 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderClear(gRenderer.get());
